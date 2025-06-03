@@ -1,0 +1,19 @@
+# Ignore build directories and output binaries
+cpp/output/
+build/
+*.o
+*.obj
+*.exe
+*.out
+*.dll
+*.so
+*.dylib
+
+# Ignore IDE/editor files
+.vscode/
+.idea/
+*.log
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
