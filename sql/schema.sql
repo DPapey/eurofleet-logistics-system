@@ -97,8 +97,8 @@ CREATE TABLE vehicle_type(
 CREATE TABLE vehicle_model(
 	model_id SERIAL PRIMARY KEY,
 	model_name VARCHAR(40),
-	powertrain_id INT,
-	vehicle_type_id INT,
+	powertrain_id INT NOT NULL,
+	vehicle_type_id INT NOT NULL,
 	FOREIGN KEY (powertrain_id) REFERENCES powertrain(powertrain_id),
 	FOREIGN KEY (vehicle_type_id) REFERENCES vehicle_type(vehicle_type_id)
 );
@@ -203,6 +203,9 @@ CREATE TABLE assignment_status(
 );
 
 -- Assigning Staff to Vehicles for an assignment (they may have same truck for a while, may one day have a different etc (malleable)
+
+
+--TODO: Do I add staff_certification to assignments? ensuring applicable staff
 CREATE TABLE assignment(
 	assignment_id SERIAL PRIMARY KEY, 
 	vehicle_id INT NOT NULL,
