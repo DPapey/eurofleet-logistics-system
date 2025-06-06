@@ -4,7 +4,6 @@
 DROP INDEX IF EXISTS idx_address_type_id; 
 DROP INDEX IF EXISTS idx_vehicle_id; 
 DROP INDEX IF EXISTS idx_staff_id;
-DROP INDEX IF EXISTS idx_freight_id; 
 DROP INDEX IF EXISTS idx_origin_address_id;
 DROP INDEX IF EXISTS idx_dest_address_id;
 
@@ -16,6 +15,7 @@ DROP TABLE IF EXISTS supplier_contract;
 DROP TABLE IF EXISTS supplier;
 DROP TABLE IF EXISTS staff_certification;
 DROP TABLE IF EXISTS certification_type;
+DROP TABLE IF EXISTS app_user;
 DROP TABLE IF EXISTS staff;
 DROP TABLE IF EXISTS staff_role;
 DROP TABLE IF EXISTS clearance_level;
@@ -52,7 +52,7 @@ CREATE TABLE address(
 	town VARCHAR(100),
 	postcode VARCHAR(7) NOT NULL,
 	address_type_id INT NOT NULL,
-	FOREIGN KEY (address_type_id) REFERENCES address_type(addr_type_id)
+	FOREIGN KEY (address_type_id) REFERENCES address_type(address_type_id)
 	ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -157,6 +157,19 @@ CREATE TABLE staff(
 	ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+CREATE TABLE app_user(
+	user_id SERIAL PRIMARY KEY,
+	staff_id INT NOT NULL UNIQUE,
+	username VARCHAR(40) NOT NULL UNIQUE,
+	hashed_password VARCHAR(255) NOT NULL,
+	is_active BOOLEAN DEFAULT TRUE,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	FOREIGN KEY (staff_id) REFERENCES staff(staff_id)
+	ON DELETE RESTRICT
+);
+
+
+
 CREATE TABLE certification_type(
 	cert_type_id SERIAL PRIMARY KEY,
 	cert_name VARCHAR(30) NOT NULL
@@ -231,7 +244,7 @@ CREATE TABLE shipment(
 	dest_address_id INT,
 	shipment_date DATE,
 	delivery_date DATE,
-	CHECK (shipment_date < delivery_date),
+	CHECK (shipment_date IS NULL OR delivery_date IS NULL OR shipment_date < delivery_date),
 	FOREIGN KEY (assignment_id) REFERENCES assignment(assignment_id)
 	ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (origin_address_id) REFERENCES address(address_id)

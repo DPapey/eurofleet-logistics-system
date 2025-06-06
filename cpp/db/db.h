@@ -2,31 +2,37 @@
 #define DB_H
 
 #include <string>
-#include <vector>
+#include <memory>
 #include <pqxx/pqxx>
 
-struct vehicle {
-	int id;
-	std::string license_plate;
-	std::string model;
-	int year;
-	std::string status;
-};
+
 
 class Database {
 	public:
-		Database(const std::string& connection_str);
-		~Database();
+		explicit Database(const std::string& connection_str);
+		~Database(); //Autodisconnect deconstructor
 
 		bool connect();
 		void disconnect();
+		bool isConnected() const;
 
-		std::vector<vehicle> getVehicles() const;
+		//Execute non-query SQL (INSERT, UPDATE, DELETE)
 		bool executeSQL(const std::string& sql);
+
+		//Return SELECT statement result
+		pqxx::result executeQuery(const std::string& sql);
+	
+		//Provide access to connection for transactions if necessary.
+		pqxx::connection& getConnection() const;
+
+		//App User Login (Create Accounts with Staff email)
+		bool loginUser(const std::string username, const std::string password);
+
+		bool createUse
 
 	private:
 		std::string conn_str;
-		std::unique_ptr<pqxx::connection> conn; //Safely declaring a unique pointer to close db when necessary.
+		std::unique_ptr<pqxx::connection> conn; //Safely declaring a smart pointer to close db when necessary.
 };
 
 std::string getConnectionStrFromEnv();
