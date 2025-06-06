@@ -28,11 +28,9 @@ class Database {
 		//App User Login (Create Accounts with Staff email)
 		bool loginUser(const std::string username, const std::string password);
 
-		bool createUse
-
 	private:
 		std::string conn_str;
-		std::unique_ptr<pqxx::connection> conn; //Safely declaring a smart pointer to close db when necessary.
+		std::unique_ptr<pqxx::connection> conn; //Declaring connection as a smart pointer to securely close db when necessary.
 };
 
 std::string getConnectionStrFromEnv();
