@@ -1,127 +1,126 @@
--- Powertrain types
 INSERT INTO powertrain (powertrain_type, powertrain_description) VALUES
-    ('Diesel', 'Standard diesel engine.'),
-    ('Petrol', 'Standard petrol engine.'),
-    ('Electric', 'Battery electric powertrain.'),
-    ('Hybrid', 'Combination of electric and combustion.');
+('Diesel', 'Diesel internal combustion engine'),
+('Electric', 'Electric motor powered'),
+('Hybrid', 'Combination of internal combustion and electric motor');
 
--- Address types
 INSERT INTO address_type (address_type_name) VALUES
-    ('dealership'),
-    ('staff'),
-    ('supplier'),
-    ('origin'),
-    ('destination');
+('Home'),
+('Work'),
+('Garage'),
+('Dealership'),
+('Warehouse');
 
--- Addresses
-INSERT INTO address (street, town, postcode, address_type_id) VALUES
-    ('1 Fleet Road', 'Newcastle', 'NE1 1AA', 1),         -- Dealership 1
-    ('99 Motorway Lane', 'Teesside', 'TS1 2AB', 1),      -- Dealership 2
-    ('12 Green Terrace', 'Sunderland', 'SR2 7QE', 2),    -- Staff: Alice Smith
-    ('34 West Grove', 'Durham', 'DH1 5HX', 2),           -- Staff: John Doe
-    ('77 Industrial Park', 'Middlesbrough', 'TS3 9XY', 3), -- Supplier 1
-    ('45 Logistics Ave', 'Hartlepool', 'TS24 7ZZ', 3),   -- Supplier 2
-    ('200 Origin Street', 'Gateshead', 'NE8 1AA', 4),    -- Shipment origin
-    ('150 Destination Rd', 'Stockton-on-Tees', 'TS18 2BB', 5), -- Shipment dest
-    ('21 Rose Street', 'Sunderland', 'SR3 4AB', 2);      -- Staff: Emily Brown (NEW)
+INSERT INTO region (region_name) VALUES
+('London'),
+('South East'),
+('Midlands'),
+('North West'),
+('Scotland');
 
--- Contact info
+INSERT INTO postcode (postcode, town, region_id) VALUES
+('SW1A 1AA', 'London', 1),
+('BN1 1AA', 'Brighton', 2),
+('B1 1AA', 'Birmingham', 3),
+('L1 1AA', 'Liverpool', 4),
+('EH1 1AA', 'Edinburgh', 5);
+
+INSERT INTO address (street, postcode_id, address_type_id) VALUES
+('10 Downing Street', 1, 2),
+('15 Kings Road', 2, 1),
+('22 Garage Lane', 3, 3),
+('45 Dealership Drive', 4, 4),
+('3 Warehouse Way', 5, 5);
+
 INSERT INTO contact_info (email_address, phone_number) VALUES
-    ('contact.dealer1@fleetdemo.com', '+441234567890'),    -- Dealer 1
-    ('sales.dealer2@fleetdemo.com', '+441234567891'),      -- Dealer 2
-    ('alice.smith@fleetdemo.co.uk', '+447000000001'),      -- Staff: Alice Smith
-    ('john.doe@fleetdemo.co.uk', '+447000000002'),         -- Staff: John Doe
-    ('supplier1@fleetdemo.net', '+441612345678'),          -- Supplier 1
-    ('supplier2@fleetdemo.net', '+441612345679'),          -- Supplier 2
-    ('emily.brown@fleetdemo.co.uk', '+447000000003');      -- Staff: Emily Brown (NEW)
+('john.doe@eurofleetlog.co.uk', '01234567890'),
+('jane.smith@eurofleetlog.co.uk', '01987654321'),
+('bob.brown@eurofleetlog.co.uk', '01189998877'),
+('anna.white@eurofleetlog.co.uk', '01700987654'),
+('mark.johnson@eurofleetlog.co.uk', '02079460123');
 
--- Garages
 INSERT INTO garage (garage_name, contact_id, address_id) VALUES
-    ('North East Garage', 1, 1),
-    ('Teesside Maintenance', 2, 2);
+('Central Garage', 3, 3),
+('North Garage', 4, 3),
+('East Garage', 5, 3);
 
--- Dealerships
 INSERT INTO dealership (dealership_name, address_id, contact_id) VALUES
-    ('Scania Newcastle', 1, 1),
-    ('Renault Teesside', 2, 2);
+('City Dealership', 4, 1),
+('Town Dealership', 5, 2),
+('Village Dealership', 1, 3);
 
--- Vehicle types
 INSERT INTO vehicle_type (vehicle_type_name) VALUES
-    ('Truck'),
-    ('Trailer');
+('Truck'),
+('Van'),
+('Trailer');
 
--- Vehicle models
 INSERT INTO vehicle_model (model_name, powertrain_id, vehicle_type_id) VALUES
-    ('Scania R450', 1, 1),
-    ('Renault T-Series', 1, 1),
-    ('Scania Electric', 3, 1);
+('Model A', 1, 1),
+('Model B', 2, 2),
+('Model C', 3, 3);
 
--- Vehicles
 INSERT INTO vehicle (vehicle_number, model_id, manufactured_year, mileage) VALUES
-    ('NE-FL-0001', 1, 2019, 120000),
-    ('TS-FL-0002', 2, 2018, 90000),
-    ('NE-FL-0003', 3, 2022, 15000);
+('VAN1234', 1, 2020, 25000),
+('TRK5678', 2, 2022, 10000),
+('TRL9012', 3, 2021, 5000);
 
--- Vehicle registrations
 INSERT INTO vehicle_registration (vehicle_id, number_plate, start_date, expiry_date) VALUES
-    (1, 'NE19 FLT', '2019-01-01', '2024-01-01'),
-    (2, 'TS18 FLT', '2018-06-01', '2023-06-01'),
-    (3, 'NE22 ELE', '2022-05-01', '2027-05-01');
+(1, 'AB12 CDE', '2023-01-01', '2024-01-01'),
+(2, 'EF34 GHI', '2023-03-01', '2024-03-01'),
+(3, 'JK56 LMN', '2023-06-01', '2024-06-01');
 
--- Clearance levels
 INSERT INTO clearance_level (clearance_type, clearance_description) VALUES
-    ('Admin', 'Full system access'),
-    ('Manager', 'Can manage staff and assignments'),
-    ('Driver', 'Can be assigned vehicles');
+('Level 1', 'Basic clearance'),
+('Level 2', 'Intermediate clearance'),
+('Level 3', 'Advanced clearance');
 
--- Staff roles
 INSERT INTO staff_role (role_name, clearance_id) VALUES
-    ('Administrator', 1),
-    ('Fleet Manager', 2),
-    ('Driver', 3);
+('Driver', 1),
+('Mechanic', 2),
+('Manager', 3);
 
--- Staff
 INSERT INTO staff (surname, forename, staff_role_id, hire_date, contact_id, address_id) VALUES
-    ('Smith', 'Alice', 3, '2020-04-15', 3, 3),      -- Uses contact_id 3, address_id 3
-    ('Doe', 'John', 3, '2019-08-01', 4, 4),         -- Uses contact_id 4, address_id 4
-    ('Brown', 'Emily', 2, '2018-11-23', 7, 9);      -- Uses contact_id 7, address_id 9
+('Doe', 'John', 1, '2020-01-15', 1, 2),
+('Smith', 'Jane', 2, '2019-04-23', 2, 2),
+('Brown', 'Bob', 3, '2021-08-12', 3, 1);
 
--- Certification types
+INSERT INTO app_user (staff_id, username, hashed_password) VALUES
+(1000, 'johndoe', '$2b$12$KIXQe0/pGzWt2EjQq4pqMe8Y.HN1UmAyQYXg3HxFMyWlPSBPSx9Se'),
+(1001, 'janesmith', '$2b$12$abcdefgHIJKLmnoPQRstuVWXyz0123456789abcdefghijklmnopqrstu'),
+(1002, 'bobbrown', '$2b$12$ZYXWVUTSRQPONMLKJIHGFEDCBA9876543210zyxwvutsrqponmlkjihg');
+
 INSERT INTO certification_type (cert_name) VALUES
-    ('HGV License'),
-    ('Safety Training');
+('HGV Licence'),
+('Forklift Licence'),
+('First Aid Certificate');
 
--- Staff certifications
 INSERT INTO staff_certification (staff_id, cert_type_id, expiry_date) VALUES
-    (1, 1, '2025-12-31'), -- Alice Smith
-    (1, 2, '2024-06-30'),
-    (2, 1, '2024-11-15'), -- John Doe
-    (3, 2, '2023-12-01'); -- Emily Brown
+(1000, 1, '2025-12-31'),
+(1001, 2, '2024-05-30'),
+(1002, 3, '2023-11-15');
 
--- Suppliers
 INSERT INTO supplier (supplier_name, contact_id, address_id) VALUES
-    ('Northern Parts Ltd', 5, 5),
-    ('Fleet Supplies Co', 6, 6);
+('Transport Supplies Ltd', 4, 5),
+('Fleet Maintenance Co', 5, 3),
+('Parts & More', 1, 4);
 
--- Supplier contracts
 INSERT INTO supplier_contract (supplier_id, contract_start_date, contract_end_date, contract_terms, contract_value, contract_renewal_date) VALUES
-    (1, '2022-01-01', '2025-01-01', 'Supply of truck parts and accessories.', 150000.00, '2024-12-15'),
-    (2, '2023-03-15', '2026-03-15', 'Logistics and freight support.', 200000.00, '2025-02-28');
+(1, '2022-01-01', '2025-01-01', 'Standard supply contract for transport materials', 150000.00, '2024-12-01'),
+(2, '2021-06-15', '2024-06-14', 'Fleet maintenance and repairs', 95000.00, '2024-05-30'),
+(3, '2023-03-01', '2026-02-28', 'Parts supply and logistics support', 50000.00, NULL);
 
--- Assignment statuses
 INSERT INTO assignment_status (assignment_status_name, status_description) VALUES
-    ('Planned', 'Assignment scheduled but not started'),
-    ('Active', 'Assignment currently in progress'),
-    ('Completed', 'Assignment finished successfully'),
-    ('Cancelled', 'Assignment was cancelled');
+('Pending', 'Assignment created, pending approval'),
+('Active', 'Assignment currently active'),
+('Completed', 'Assignment completed'),
+('Cancelled', 'Assignment cancelled');
 
--- Assignments
 INSERT INTO assignment (vehicle_id, staff_id, contract_id, assignment_start_date, assignment_deadline, assignment_status_id) VALUES
-    (1, 1, 1, '2024-01-10', '2024-01-20', 2), -- Alice Smith
-    (2, 2, 2, '2024-02-01', '2024-02-15', 1); -- John Doe
+(1, 1000, 1, '2023-06-01', '2023-06-15', 2),
+(2, 1001, 2, '2023-05-01', '2023-05-30', 2),
+(3, 1002, 3, '2023-04-15', '2023-05-15', 3);
 
--- Shipments
 INSERT INTO shipment (assignment_id, origin_address_id, dest_address_id, shipment_date, delivery_date) VALUES
-    (1, 7, 8, '2024-01-11', '2024-01-18'),
-    (2, 8, 7, '2024-02-02', '2024-02-14');
+(1, 3, 5, '2023-06-01', '2023-06-05'),
+(2, 4, 2, '2023-05-01', '2023-05-10'),
+(3, 5, 1, '2023-04-16', '2023-04-20');
 
