@@ -1,126 +1,169 @@
-INSERT INTO powertrain (powertrain_type, powertrain_description) VALUES
-('Diesel', 'Diesel internal combustion engine'),
-('Electric', 'Electric motor powered'),
-('Hybrid', 'Combination of internal combustion and electric motor');
+INSERT INTO region (region_code, region_name) VALUES
+('TYW', 'Tyne and Wear'),
+('CDM', 'County Durham'),
+('NBL', 'Northumberland'),
+('TSD', 'Teesside'),
+('YKS', 'Yorkshire'),
+('EMD', 'East Midlands'),
+('WMD', 'West Midlands'),
+('NWT', 'North West'),
+('SCT', 'Scotland'),
+('LND', 'London'),
+('DEU', 'Germany'),
+('FRA', 'France'),
+('NLD', 'Netherlands');
 
 INSERT INTO address_type (address_type_name) VALUES
+('Depot'),
 ('Home'),
-('Work'),
+('Client Site'),
+('Warehouse'),
+('Supplier'),
 ('Garage'),
-('Dealership'),
-('Warehouse');
+('Dealership');
 
-INSERT INTO region (region_name) VALUES
-('London'),
-('South East'),
-('Midlands'),
-('North West'),
-('Scotland');
-
-INSERT INTO postcode (postcode, town, region_id) VALUES
-('SW1A 1AA', 'London', 1),
-('BN1 1AA', 'Brighton', 2),
-('B1 1AA', 'Birmingham', 3),
-('L1 1AA', 'Liverpool', 4),
-('EH1 1AA', 'Edinburgh', 5);
-
-INSERT INTO address (street, postcode_id, address_type_id) VALUES
-('10 Downing Street', 1, 2),
-('15 Kings Road', 2, 1),
-('22 Garage Lane', 3, 3),
-('45 Dealership Drive', 4, 4),
-('3 Warehouse Way', 5, 5);
-
-INSERT INTO contact_info (email_address, phone_number) VALUES
-('john.doe@eurofleetlog.co.uk', '01234567890'),
-('jane.smith@eurofleetlog.co.uk', '01987654321'),
-('bob.brown@eurofleetlog.co.uk', '01189998877'),
-('anna.white@eurofleetlog.co.uk', '01700987654'),
-('mark.johnson@eurofleetlog.co.uk', '02079460123');
-
-INSERT INTO garage (garage_name, contact_id, address_id) VALUES
-('Central Garage', 3, 3),
-('North Garage', 4, 3),
-('East Garage', 5, 3);
-
-INSERT INTO dealership (dealership_name, address_id, contact_id) VALUES
-('City Dealership', 4, 1),
-('Town Dealership', 5, 2),
-('Village Dealership', 1, 3);
+INSERT INTO powertrain (powertrain_type, powertrain_description) VALUES
+('Diesel', 'Standard diesel engine'),
+('Electric', 'Fully electric truck'),
+('Hybrid', 'Combination of diesel and electric');
 
 INSERT INTO vehicle_type (vehicle_type_name) VALUES
-('Truck'),
-('Van'),
-('Trailer');
+('HGV'),
+('LGV'),
+('Articulated Lorry'),
+('Box Truck'),
+('Flatbed Truck');
+
+INSERT INTO postcode (postcode, town, region_code) VALUES
+('NE1 4LP', 'Newcastle upon Tyne', 'TYW'),
+('TS1 3BX', 'Middlesbrough', 'TSD'),
+('DL1 5QP', 'Darlington', 'CDM'),
+('LS1 4AB', 'Leeds', 'YKS'),
+('YO1 6JF', 'York', 'YKS'),
+('NG1 1AA', 'Nottingham', 'EMD'),
+('B1 1AA', 'Birmingham', 'WMD'),
+('EH1 3QR', 'Edinburgh', 'SCT'),
+('10115', 'Berlin', 'DEU'),
+('75001', 'Paris', 'FRA'),
+('1101 AB', 'Amsterdam', 'NLD');
+
+
+INSERT INTO contact_info (email_address, phone_number) VALUES
+('depot1@eurofleet.co.uk', '01912345678'),
+('garage1@eurofleet.co.uk', '01914567890'),
+('leedsclient@shipco.com', '01134567891'),
+('newcastle@dealer.com', '01917654321'),
+('admin@eurofleet.co.uk', '01911234567'),
+('driver.john@eurofleet.co.uk', '07700111222'),
+('driver.jane@eurofleet.co.uk', '07700222333'),
+('driver.steve@eurofleet.co.uk', '07700333444'),
+('supplier1@logico.com', '02071234567'),
+('supplier2@haulage.eu', '004930123456'),
+('driver.lucy@eurofleet.co.uk', '07700444555'),
+('supplier3@freight.fr', '003314223344');
+
+INSERT INTO address (street, postcode_id, address_type_id) VALUES
+('Fleet Depot Road', 1, 1),
+('12 High Street', 2, 2),
+('1 Client Way', 4, 3),
+('100 Industrial Park', 5, 4),
+('Supplier Lane', 6, 5),
+('Garage Drive', 3, 6),
+('Dealer Row', 1, 7),
+('18 Castle Road', 7, 2),
+('22 Transit Boulevard', 9, 4),
+('48 Rue Centrale', 10, 4),
+('Europark Zuid 1', 11, 4),
+('6 Riverside Way', 5, 2),
+('89 Quayside', 1, 2);
+
+INSERT INTO garage (garage_name, contact_id, address_id) VALUES
+('Central Garage', 2, 6);
+
+INSERT INTO dealership (dealership_name, contact_id, address_id) VALUES
+('Newcastle Trucks Ltd', 4, 7);
 
 INSERT INTO vehicle_model (model_name, powertrain_id, vehicle_type_id) VALUES
-('Model A', 1, 1),
-('Model B', 2, 2),
-('Model C', 3, 3);
+('Scania R450', 1, 3),
+('Volvo FH Electric', 2, 1),
+('DAF XF Hybrid', 3, 3),
+('Mercedes Actros', 1, 3),
+('Iveco S-Way', 1, 1);
 
 INSERT INTO vehicle (vehicle_number, model_id, manufactured_year, mileage) VALUES
-('VAN1234', 1, 2020, 25000),
-('TRK5678', 2, 2022, 10000),
-('TRL9012', 3, 2021, 5000);
+('EF-TRK-001', 1, 2019, 180000),
+('EF-TRK-002', 2, 2022, 50000),
+('EF-TRK-003', 3, 2020, 120000),
+('EF-TRK-004', 4, 2021, 90000),
+('EF-TRK-005', 5, 2023, 25000);
 
-INSERT INTO vehicle_registration (vehicle_id, number_plate, start_date, expiry_date) VALUES
-(1, 'AB12 CDE', '2023-01-01', '2024-01-01'),
-(2, 'EF34 GHI', '2023-03-01', '2024-03-01'),
-(3, 'JK56 LMN', '2023-06-01', '2024-06-01');
-
+INSERT INTO vehicle_registration (vehicle_id, number_plate, registration_period) VALUES
+(100, 'NK19 ABC', '[2019-03-15,2025-03-14)'::daterange),
+(101, 'NE22 EVC', '[2022-07-01,2026-07-01)'::daterange),
+(102, 'DL20 HYB', '[2020-09-10,2024-09-09)'::daterange),
+(103, 'LS21 TRK', '[2021-05-20,2025-05-19)'::daterange),
+(104, 'EF23 NEW', '[2023-01-10,2027-01-09)'::daterange);
 INSERT INTO clearance_level (clearance_type, clearance_description) VALUES
-('Level 1', 'Basic clearance'),
-('Level 2', 'Intermediate clearance'),
-('Level 3', 'Advanced clearance');
+('Standard', 'Standard access for staff'),
+('Secure', 'Access to sensitive shipment data'),
+('Admin', 'Full administrative access');
 
 INSERT INTO staff_role (role_name, clearance_id) VALUES
 ('Driver', 1),
-('Mechanic', 2),
-('Manager', 3);
+('Mechanic', 1),
+('Dispatcher', 2),
+('Administrator', 3);
 
 INSERT INTO staff (surname, forename, staff_role_id, hire_date, contact_id, address_id) VALUES
-('Doe', 'John', 1, '2020-01-15', 1, 2),
-('Smith', 'Jane', 2, '2019-04-23', 2, 2),
-('Brown', 'Bob', 3, '2021-08-12', 3, 1);
+('Smith', 'John', 1, '2020-01-15', 6, 2),
+('Doe', 'Jane', 1, '2021-04-10', 7, 8),
+('Brown', 'Steve', 1, '2019-11-03', 8, 12),
+('Wilson', 'Lucy', 1, '2022-06-20', 11, 13),
+('Taylor', 'Alice', 3, '2018-03-12', 5, 1),
+('Johnson', 'Emily', 4, '2017-05-05', 5, 1);
 
-INSERT INTO app_user (staff_id, username, hashed_password) VALUES
-(1000, 'johndoe', '$2b$12$KIXQe0/pGzWt2EjQq4pqMe8Y.HN1UmAyQYXg3HxFMyWlPSBPSx9Se'),
-(1001, 'janesmith', '$2b$12$abcdefgHIJKLmnoPQRstuVWXyz0123456789abcdefghijklmnopqrstu'),
-(1002, 'bobbrown', '$2b$12$ZYXWVUTSRQPONMLKJIHGFEDCBA9876543210zyxwvutsrqponmlkjihg');
+--App user will require creation app-level (for bcrypt hashed passwords)
 
 INSERT INTO certification_type (cert_name) VALUES
 ('HGV Licence'),
-('Forklift Licence'),
-('First Aid Certificate');
+('ADR Certificate'),
+('CPC Qualification');
 
 INSERT INTO staff_certification (staff_id, cert_type_id, expiry_date) VALUES
-(1000, 1, '2025-12-31'),
-(1001, 2, '2024-05-30'),
-(1002, 3, '2023-11-15');
+(100, 1, '2025-12-31'),
+(100, 3, '2026-05-30'),
+(101, 1, '2026-11-15'),
+(102, 1, '2024-08-01'),
+(103, 1, '2027-03-20'),
+(104, 2, '2026-10-10');
 
 INSERT INTO supplier (supplier_name, contact_id, address_id) VALUES
-('Transport Supplies Ltd', 4, 5),
-('Fleet Maintenance Co', 5, 3),
-('Parts & More', 1, 4);
+('LogiCo Freight', 9, 5),
+('EuroHaulage GmbH', 10, 9),
+('Transport Express France', 12, 10);
 
 INSERT INTO supplier_contract (supplier_id, contract_start_date, contract_end_date, contract_terms, contract_value, contract_renewal_date) VALUES
-(1, '2022-01-01', '2025-01-01', 'Standard supply contract for transport materials', 150000.00, '2024-12-01'),
-(2, '2021-06-15', '2024-06-14', 'Fleet maintenance and repairs', 95000.00, '2024-05-30'),
-(3, '2023-03-01', '2026-02-28', 'Parts supply and logistics support', 50000.00, NULL);
+(1, '2023-01-01', '2025-12-31', 'North England distribution contract', 150000.00, '2025-11-30'),
+(2, '2024-01-15', '2026-01-14', 'Berlin outbound transport', 200000.00, '2025-12-01'),
+(3, '2022-06-01', '2024-06-01', 'France imports and returns', 100000.00, '2024-05-01');
 
 INSERT INTO assignment_status (assignment_status_name, status_description) VALUES
-('Pending', 'Assignment created, pending approval'),
-('Active', 'Assignment currently active'),
-('Completed', 'Assignment completed'),
-('Cancelled', 'Assignment cancelled');
+('Pending', 'Awaiting dispatch'),
+('In Progress', 'Shipment in transit'),
+('Completed', 'Delivered and confirmed'),
+('Cancelled', 'Assignment voided');
 
 INSERT INTO assignment (vehicle_id, staff_id, contract_id, assignment_start_date, assignment_deadline, assignment_status_id) VALUES
-(1, 1000, 1, '2023-06-01', '2023-06-15', 2),
-(2, 1001, 2, '2023-05-01', '2023-05-30', 2),
-(3, 1002, 3, '2023-04-15', '2023-05-15', 3);
+(102, 100, 1, '2024-06-01', '2024-06-03', 2),
+(101, 101, 2, '2024-06-05', '2024-06-08', 1),
+(100, 102, 1, '2024-05-20', '2024-05-22', 3),
+(103, 103, 3, '2024-06-10', '2024-06-15', 1),
+(104, 104, 2, '2024-06-12', '2024-06-18', 1);
 
 INSERT INTO shipment (assignment_id, origin_address_id, dest_address_id, shipment_date, delivery_date) VALUES
-(1, 3, 5, '2023-06-01', '2023-06-05'),
-(2, 4, 2, '2023-05-01', '2023-05-10'),
-(3, 5, 1, '2023-04-16', '2023-04-20');
+(1, 1, 4, '2024-06-01', '2024-06-03'),
+(2, 1, 9, '2024-06-05', NULL),
+(3, 1, 5, '2024-05-20', '2024-05-22'),
+(4, 1, 10, '2024-06-10', NULL),
+(5, 1, 11, '2024-06-12', NULL);
 
