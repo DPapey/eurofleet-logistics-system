@@ -262,7 +262,7 @@ CREATE TABLE shipment(
 	dest_address_id INT,
 	shipment_date DATE,
 	delivery_date DATE,
-	CHECK (shipment_date IS NULL OR delivery_date IS NULL OR shipment_date < delivery_date),
+	CHECK (shipment_date IS NULL OR delivery_date IS NULL OR shipment_date <= delivery_date),
 	FOREIGN KEY (assignment_id) REFERENCES assignment(assignment_id)
 	ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (origin_address_id) REFERENCES address(address_id)
